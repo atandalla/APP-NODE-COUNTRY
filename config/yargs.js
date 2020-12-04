@@ -18,7 +18,6 @@ let opciones = {
 
 
 
-
 const argv = require('yargs')
     .command('mostrar', 'Imprime en pantalla el resultado de la búsqueda', opciones)
     .command('guardar', 'Genera un archivo de texto con el resultado de la búsqueda', opciones)
