@@ -17,7 +17,7 @@ const reederCSV = async(archivo) => {
         })
         .on('end', () => {
             let data = JSON.stringify(datosCsv);
-            fs.writeFile('data.json', data, (err) => {
+            fs.writeFile('resultados/data.json', data, (err) => {
                 if (err) throw new Error('No se pudo grabar', err);
             });
         });
@@ -26,7 +26,7 @@ const reederCSV = async(archivo) => {
 const leerDatos = () => {
 
     try {
-        reedDatos = require('../data.json');
+        reedDatos = require('../resultados/data.json');
 
     } catch (error) {
         reedDatos = [];
