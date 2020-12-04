@@ -2,30 +2,34 @@ const argv = require('./config/yargs').argv;
 const colors = require('colors');
 
 //Destruccturacion
-const { crearArchivo, listarArchivo, mostrarListado } = require('./buscador/buscar'); //(./) busque al mismo nivel
+const { guardarArchivo, mostrarListado } = require('./buscador/buscar');
 
-let comando = argv._[0]; ///(_)el guion bajo es la intruccion
+let comando = argv._[0];
 
 switch (comando) {
+
+    case 'mostrar':
+
+        let country = mostrarListado(argv.archivo, argv.pais, argv.anio)
+
+        console.log(colors.red('==========RESULTADO DE LA BUSQUEDA========='));
+
+        console.log(colors.cyan(`Datos: ${country.indicador}`));
+        console.log(colors.cyan(`País: ${country.name}`));
+        console.log(colors.cyan(`Año: ${country.anio}`));
+        console.log(colors.cyan(`Valor: ${country.valor}`));
+
+
+        break;
+
+
     case 'guardar':
-        crearArchivo(argv.archivo, argv.pais, argv.anio)
+        guardarArchivo(argv.archivo, argv.pais, argv.anio)
             .then(mensaje => { console.log(mensaje); })
             .catch(err => { console.log(err); })
         break;
 
-    case 'mostrar':
 
-        let listado = mostrarListado(argv.archivo, argv.pais, argv.anio)
-
-        console.log(colors.red.bgWhite.bold('========RESULTADO DE LA BUSQUEDA========='));
-        console.table(listado)
-        console.log(colors.black.bgWhite(`Datos: ${listado.indicador}`));
-        console.log(colors.black.bgWhite(`País: ${listado.name}`));
-        console.log(colors.black.bgWhite(`Año: ${listado.anio}`));
-        console.log(colors.black.bgWhite(`Valor ${listado.valor}`));
-
-
-        break;
 
 
 
