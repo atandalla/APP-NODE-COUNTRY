@@ -19,7 +19,6 @@ switch (comando) {
 
     case 'listar':
         let listado = mostrarListado();
-        console.log(listado);
         break;
 
 
