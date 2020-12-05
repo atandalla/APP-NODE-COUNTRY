@@ -1,8 +1,9 @@
 const argv = require('./config/yargs').argv;
 const colors = require('colors');
 
-//Destruccturacion
-const { guardarArchivo, mostrarListado } = require('./buscador/buscar');
+//Destructuracion
+const { mostrarListado } = require('./buscador/buscar');
+const { guardarArchivo } = require('./buscador/guardar');
 
 let comando = argv._[0];
 
@@ -19,9 +20,7 @@ switch (comando) {
         console.log(colors.cyan(`Año: ${country.anio}`));
         console.log(colors.cyan(`Valor: ${country.valor}`));
 
-
         break;
-
 
     case 'guardar':
         guardarArchivo(argv.archivo, argv.pais, argv.anio)
@@ -29,8 +28,8 @@ switch (comando) {
             .catch(err => { console.log(err); })
         break;
 
-
-
+    default:
+        console.log('Comando no es reconocido.');
 
 
 

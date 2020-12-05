@@ -1,10 +1,9 @@
 const fs = require('fs');
 const csv = require('csv-parser');
 
-datosCountry = []
 datosCsv = []
 reedDatos = []
-saveCountry = []
+
 
 ////////////////// Lectura del CSV /////////////////
 const reederCSV = async(archivo) => {
@@ -17,7 +16,7 @@ const reederCSV = async(archivo) => {
         })
         .on('end', () => {
             let data = JSON.stringify(datosCsv);
-            fs.writeFile('resultados/data.json', data, (err) => {
+            fs.writeFile('model/data.json', data, (err) => {
                 if (err) throw new Error('No se pudo grabar', err);
             });
         });
@@ -26,7 +25,7 @@ const reederCSV = async(archivo) => {
 const leerDatos = () => {
 
     try {
-        reedDatos = require('../resultados/data.json');
+        reedDatos = require('../model/data.json');
 
     } catch (error) {
         reedDatos = [];
@@ -63,47 +62,15 @@ const mostrarListado = (archivo, cod, anio) => {
 
             return obCountry;
         }
-
-
     }
 
     return false;
 }
 
 
-////////////////// Guardar Datos /////////////////
-
-
-const guardarArchivo = (archivo, cod, anio) => {
-    return new Promise((resolve, reject) => {
-
-        let saveCountry = {
-            archivo,
-            cod,
-            anio
-        };
-
-        datosCountry.push(saveCountry);
-
-        let data = JSON.stringify(datosCountry);
-        fs.writeFile(`resultados/${cod}-${anio}.txt`, data, (err) => {
-            if (err) reject(err);
-            else resolve(`Archivo guardado exitósamente: resultados/${cod}-${anio}.txt`.yellow);
-        });
-
-        return datosCountry;
-
-    })
-}
-
-
-
-
-
-// mostrarListado('ECU', '2004')
-
-
+//Exportar Módulos
 module.exports = {
     mostrarListado,
-    guardarArchivo
+    reederCSV,
+    leerDatos
 }
